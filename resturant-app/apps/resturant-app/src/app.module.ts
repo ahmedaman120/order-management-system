@@ -4,9 +4,19 @@ import { AppService } from './app.service';
 import { AUTH_PACKAGE_NAME, RPC_AUTH_SERVICE_NAME } from '@app/grpc';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
+import { ScheduleModule } from '@nestjs/schedule';
+import { ReportGeneratorService } from './report-generator.service';
+import { DatabaseModule } from './database/database.module';
+import { CacheModule } from '@nestjs/cache-manager';
+import { ConfigModule } from '@nestjs/config';
+import { RedisOptions } from './configs/app-option.constants';
 
 @Module({
   imports: [
+    DatabaseModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+    CacheModule.registerAsync(RedisOptions),
+    ScheduleModule.forRoot(),
     ClientsModule.registerAsync([
       {
         name: RPC_AUTH_SERVICE_NAME,
@@ -24,6 +34,6 @@ import { join } from 'path';
     ]),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ReportGeneratorService],
 })
 export class AppModule {}

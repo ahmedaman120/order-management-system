@@ -1,6 +1,39 @@
 version: '3.9'
 
 services:
+  auth:
+    build:
+       context: .
+       target: auth-app
+    network_mode: host
+    
+    depends_on:
+      - mongodb
+  payment:
+    build:
+       context: .
+       target: payment-service
+    network_mode: host
+    depends_on:
+      - auth
+
+  order:
+    build:
+       context: .
+       target: order-app
+    network_mode: host
+    depends_on:
+      - mongodb
+      - auth
+      - payment
+  resturant:
+    build:
+       context: .
+       target: resturant-app
+    network_mode: host
+    depends_on:
+      - mongodb
+    
   mongodb:
     image: mongo:6-jammy
     ports:
