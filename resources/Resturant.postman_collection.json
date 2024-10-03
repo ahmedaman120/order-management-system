@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "7ad093ac-def8-408d-9b88-a491e9d8c2e6",
+		"name": "Resturant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6300862"
+	},
+	"item": [
+		{
+			"name": "Get CSRF Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api-auth}}/auth/csrf-token",
+					"host": [
+						"{{api-auth}}"
+					],
+					"path": [
+						"auth",
+						"csrf-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "csrf-token",
+						"value": "nDHHgJoV-9ptLvZ-v8r8aYBkidVdcxZpc5Ag",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\":\"ahmed\",\r\n    \"lastName\":\"ayman\",\r\n    \"email\":\"a@2g.com\",\r\n    \"password\":\"123456789\",\r\n    \"bio\":\"asdbjkdasb\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-auth}}/auth/user/signup",
+					"host": [
+						"{{api-auth}}"
+					],
+					"path": [
+						"auth",
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign in",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "csrf-token",
+						"value": "nDHHgJoV-9ptLvZ-v8r8aYBkidVdcxZpc5Ag",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"email\":\"a@g.com\",\r\n    \"password\":\"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-auth}}/auth/user/signin",
+					"host": [
+						"{{api-auth}}"
+					],
+					"path": [
+						"auth",
+						"user",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"customerId\": \"test\",\n\n  \"items\": [{\n    \"name\": \"test product\",\n    \"price\": 180.001,\n    \"count\": 4\n  }],\n  \"totalPrice\": 900,\n  \"paymentId\":\"231wsaqe\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-order}}/order",
+					"host": [
+						"{{api-order}}"
+					],
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api-report}}/report/2024-10-02",
+					"host": [
+						"{{api-report}}"
+					],
+					"path": [
+						"report",
+						"2024-10-02"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api-order",
+			"value": "http://localhost:3002",
+			"type": "string"
+		},
+		{
+			"key": "api-auth",
+			"value": "http://localhost:3001",
+			"type": "string"
+		},
+		{
+			"key": "api-report",
+			"value": "http://localhost:4000",
+			"type": "string"
+		}
+	]
+}
